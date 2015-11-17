@@ -10,7 +10,7 @@
   become: yes
   become_user: root
 
-- name: restart **project_name** 
+- name: restart project process 
   command: service "{{ project_name }}" restart
   become: yes
   become_user: root
