@@ -16,3 +16,14 @@
   * deploy/deploy-vars.yml
 
 3. Make any per instance deployment changes to deploy/deploy.yml
+
+4. Update the project package.json with the following key/value pairs
+
+  `"scripts": {
+    .
+    .
+    "deploy:production": "ansible-playbook -i deploy/production deploy/deploy.yml --ask-sudo-pass --extra-vars='target=__project_name__'",
+    "deploy:staging": "ansible-playbook -i deploy/staging deploy/deploy.yml --ask-sudo-pass --extra-vars='target=__project_name__'",
+    .
+    .
+  }
