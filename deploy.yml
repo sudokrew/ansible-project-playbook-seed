@@ -1,10 +1,10 @@
 ---
 # {{target}} should be configured in NPM extra-vars flag for ansible deploy command 
-- hosts: '{{target}}'
+- hosts: '{{ target }}'
   vars_files:
     - deploy-vars.yml
   gather_facts: false
-  user: '{{project_user}}'
+  user: '{{ project_user }}'
 
   tasks:
     # Create project directory on remote server if it doesn't already exist to clone repo into
@@ -35,7 +35,8 @@
 
     # Move the locally configured Nginx configuration to remote server and name as {{project_name}}
     - name: Install nginx config file
-      copy: src=files/{{ node_env }}/{{project_name}}.nginx dest=/etc/nginx/sites-available/{{ project_name }}
+      # copy: src=files/{{ node_env }}/{{project_name}}.nginx dest=/etc/nginx/sites-available/{{ project_name }}
+      template: src=files/{{ node_env }}/{{project_name}}.nginx.j2 dest=/etc/nginx/sites-available/{{ project_name }}
       become: true
       become_user: root
       notify: restart nginx
@@ -53,7 +54,8 @@
 
     # Move the locally configured init.d script to remote server and set proper permissions
     - name: Setup init script
-      copy: src=files/{{ node_env }}/start-carousel dest=/etc/init.d/{{ project_name }} mode=0751
+      # copy: src=files/{{ node_env }}/start-carousel dest=/etc/init.d/{{ project_name }} mode=0751
+      template: src=files/{{ node_env }}/start-carousel dest=/etc/init.d/{{ project_name }} mode=0751
       become: true
       become_user: root
       tags: 
@@ -61,7 +63,8 @@
 
     # Setup log rotation on server so that forever logs don't get too large.
     - name: Setup logrotate
-      copy: src=files/{{ node_env }}/{{ project_name }}.rotate dest=/etc/logrotate.d/{{ project_name }} mode 0751
+      # copy: src=files/{{ node_env }}/{{ project_name }}.rotate dest=/etc/logrotate.d/{{ project_name }} mode 0751
+      template: src=files/{{ node_env }}/{{ project_name }}.rotate dest=/etc/logrotate.d/{{ project_name }} mode 0751
       become: true
       become_user: root
       tags:
