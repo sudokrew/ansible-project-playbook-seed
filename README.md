@@ -3,7 +3,7 @@
 ####Installation
 1. Clone this repo in your project root with the following command:
 
-  `git clone git@bitbucket.org:sudokrew/ansible-project-playbook-seed.git deploy && rm -Rf deploy/.git`
+  `git clone git@github.com:sudokrew/ansible-project-playbook-seed.git deploy && rm -Rf deploy/.git`
 
 2. Make the proper configuration settings in:
 
