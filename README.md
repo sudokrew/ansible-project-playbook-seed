@@ -19,7 +19,8 @@
 
 4. Update the project package.json with the following key/value pairs
 
-  `"scripts": {
+  ```
+  "scripts": {
     .
     .
     "deploy:production": "ansible-playbook -i deploy/production deploy/deploy.yml --ask-sudo-pass --extra-vars='target=__project_name__'",
@@ -27,3 +28,4 @@
     .
     .
   }
+  ```
